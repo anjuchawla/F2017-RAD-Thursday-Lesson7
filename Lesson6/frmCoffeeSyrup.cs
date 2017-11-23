@@ -104,5 +104,44 @@ namespace Lesson6
                   verticalPrintLocationFloat);
 
         }
+        /// <summary>
+        /// It displays information about the company and the product
+        /// </summary>
+        /// <param name="sender">The About menu item</param>
+        /// <param name="e">Event Arguments</param>
+        private void tsmiAbout_Click(object sender, EventArgs e)
+        {
+            frmAbout info = new frmAbout();
+            info.ShowDialog();
+        }
+        /// <summary>
+        /// Allows th user to add a new coffee flavour to the list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsmiAddCoffeeFlavour_Click(object sender, EventArgs e)
+        {
+            bool itemFound = false;
+            int itemIndex = 0;
+
+            //if the user has provided a new flavour
+            if(cboCoffee.Text.Trim() != String.Empty)
+            {
+                itemFound = CheckFlavour(cboCoffee.Text);
+
+            }
+            else // no flavour provided
+            {
+                MessageBox.Show("Enter a coffee flavour to add", "Missing Data", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                cboCoffee.Focus();
+            }
+
+        }
+
+        private bool CheckFlavour(string text)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

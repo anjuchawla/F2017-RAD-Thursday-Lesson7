@@ -182,13 +182,13 @@
             // tsmiPrintAll
             // 
             this.tsmiPrintAll.Name = "tsmiPrintAll";
-            this.tsmiPrintAll.Size = new System.Drawing.Size(181, 26);
+            this.tsmiPrintAll.Size = new System.Drawing.Size(155, 26);
             this.tsmiPrintAll.Text = "&Print All";
             // 
             // tsmiPreviewAll
             // 
             this.tsmiPreviewAll.Name = "tsmiPreviewAll";
-            this.tsmiPreviewAll.Size = new System.Drawing.Size(181, 26);
+            this.tsmiPreviewAll.Size = new System.Drawing.Size(155, 26);
             this.tsmiPreviewAll.Text = "Pre&view all";
             // 
             // toolStripSeparator1
@@ -219,6 +219,7 @@
             this.tsmiAddCoffeeFlavour.Name = "tsmiAddCoffeeFlavour";
             this.tsmiAddCoffeeFlavour.Size = new System.Drawing.Size(246, 26);
             this.tsmiAddCoffeeFlavour.Text = "&Add Coffee Flavour";
+            this.tsmiAddCoffeeFlavour.Click += new System.EventHandler(this.tsmiAddCoffeeFlavour_Click);
             // 
             // tsmiRemoveCoffeeFlavour
             // 
@@ -251,6 +252,7 @@
             this.tsmiAbout.Name = "tsmiAbout";
             this.tsmiAbout.Size = new System.Drawing.Size(181, 26);
             this.tsmiAbout.Text = "&About";
+            this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
             // 
             // printPreviewDialog1
             // 
