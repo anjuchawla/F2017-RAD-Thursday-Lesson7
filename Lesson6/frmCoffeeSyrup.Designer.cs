@@ -109,6 +109,7 @@
             this.cboCoffee.Name = "cboCoffee";
             this.cboCoffee.Size = new System.Drawing.Size(193, 24);
             this.cboCoffee.TabIndex = 4;
+            this.cboCoffee.SelectedIndexChanged += new System.EventHandler(this.cboCoffee_SelectedIndexChanged);
             // 
             // lstSyrup
             // 
@@ -163,12 +164,14 @@
             this.tsmiPrintSelected.Name = "tsmiPrintSelected";
             this.tsmiPrintSelected.Size = new System.Drawing.Size(196, 26);
             this.tsmiPrintSelected.Text = "&Print Selected";
+            this.tsmiPrintSelected.Click += new System.EventHandler(this.tsmiPrintSelected_Click);
             // 
             // tsmiPreviewSelected
             // 
             this.tsmiPreviewSelected.Name = "tsmiPreviewSelected";
             this.tsmiPreviewSelected.Size = new System.Drawing.Size(196, 26);
             this.tsmiPreviewSelected.Text = "Preview &Selected";
+            this.tsmiPreviewSelected.Click += new System.EventHandler(this.tsmiPreviewSelected_Click);
             // 
             // tsmiPrintAllFlavours
             // 
@@ -182,14 +185,16 @@
             // tsmiPrintAll
             // 
             this.tsmiPrintAll.Name = "tsmiPrintAll";
-            this.tsmiPrintAll.Size = new System.Drawing.Size(155, 26);
+            this.tsmiPrintAll.Size = new System.Drawing.Size(181, 26);
             this.tsmiPrintAll.Text = "&Print All";
+            this.tsmiPrintAll.Click += new System.EventHandler(this.tsmiPrintAll_Click);
             // 
             // tsmiPreviewAll
             // 
             this.tsmiPreviewAll.Name = "tsmiPreviewAll";
-            this.tsmiPreviewAll.Size = new System.Drawing.Size(155, 26);
+            this.tsmiPreviewAll.Size = new System.Drawing.Size(181, 26);
             this.tsmiPreviewAll.Text = "Pre&view all";
+            this.tsmiPreviewAll.Click += new System.EventHandler(this.tsmiPreviewAll_Click);
             // 
             // toolStripSeparator1
             // 
@@ -226,6 +231,7 @@
             this.tsmiRemoveCoffeeFlavour.Name = "tsmiRemoveCoffeeFlavour";
             this.tsmiRemoveCoffeeFlavour.Size = new System.Drawing.Size(246, 26);
             this.tsmiRemoveCoffeeFlavour.Text = "&Remove Coffee Flavour";
+            this.tsmiRemoveCoffeeFlavour.Click += new System.EventHandler(this.tsmiRemoveCoffeeFlavour_Click);
             // 
             // tsmiClearAll
             // 
@@ -250,7 +256,7 @@
             // tsmiAbout
             // 
             this.tsmiAbout.Name = "tsmiAbout";
-            this.tsmiAbout.Size = new System.Drawing.Size(181, 26);
+            this.tsmiAbout.Size = new System.Drawing.Size(125, 26);
             this.tsmiAbout.Text = "&About";
             this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
             // 

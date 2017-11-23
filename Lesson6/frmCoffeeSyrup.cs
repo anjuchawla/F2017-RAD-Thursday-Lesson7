@@ -55,19 +55,26 @@ namespace Lesson6
 
             // Loop through the entire list.
             //for (int listIndexInteger = 0; listIndexInteger < CoffeeComboBox.Items.Count - 1; listIndexInteger++)
-            foreach (Object flavor in cboCoffee.Items)
+            if (cboCoffee.Items.Count > 0)
             {
-                //increment the  Y position for the next line.
-                verticalPrintLocationFloat += lineHeightFloat;
+                foreach (Object flavor in cboCoffee.Items)
+                {
+                    //increment the  Y position for the next line.
+                    verticalPrintLocationFloat += lineHeightFloat;
 
-                //Set up a line
-                //PrintLineString = CoffeeComboBox.Items[ListIndexInteger].ToString();
-                printLineString = flavor.ToString();
-                //Send the line to the graphics page object.
-                e.Graphics.DrawString(printLineString, printFont,
-                    Brushes.Black, horizontalPrintLocationFloat,
-                    verticalPrintLocationFloat);
-            } // end for
+                    //Set up a line
+                    //PrintLineString = CoffeeComboBox.Items[ListIndexInteger].ToString();
+                    printLineString = flavor.ToString();
+                    //Send the line to the graphics page object.
+                    e.Graphics.DrawString(printLineString, printFont,
+                        Brushes.Black, horizontalPrintLocationFloat,
+                        verticalPrintLocationFloat);
+                } // end for
+            }
+            else
+            {
+                MessageBox.Show("No coffee flavours available", "Print", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
 
@@ -121,13 +128,27 @@ namespace Lesson6
         /// <param name="e"></param>
         private void tsmiAddCoffeeFlavour_Click(object sender, EventArgs e)
         {
-            bool itemFound = false;
-            int itemIndex = 0;
+            bool itemFound;
+            
 
             //if the user has provided a new flavour
             if(cboCoffee.Text.Trim() != String.Empty)
             {
                 itemFound = CheckFlavour(cboCoffee.Text);
+                if(itemFound) //flavour already present
+                {
+                    MessageBox.Show("Duplicate flavour cannot be added",
+                        "Add Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    cboCoffee.SelectAll();
+                    cboCoffee.Focus();
+
+                }
+                else
+                {
+                    //add the flavour
+                    cboCoffee.Items.Add(cboCoffee.Text.Trim());
+                    cboCoffee.Text = String.Empty;
+                }
 
             }
             else // no flavour provided
@@ -141,7 +162,93 @@ namespace Lesson6
 
         private bool CheckFlavour(string text)
         {
-            throw new NotImplementedException();
+           
+            foreach(Object item in cboCoffee.Items)
+            {
+              
+                return text.Equals((String)item, StringComparison.CurrentCultureIgnoreCase);
+            }
+
+            return false;
+
+
+
+        }
+
+        private void tsmiRemoveCoffeeFlavour_Click(object sender, EventArgs e)
+        {
+            //to force the user to select from the list
+            cboCoffee.DropDownStyle = ComboBoxStyle.DropDownList;
+            
+
+         
+        }
+
+        private void cboCoffee_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //no selection made
+            if (cboCoffee.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select the flavour to delete", "Delete Failed",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                cboCoffee.Focus();
+            }
+            else
+            {
+                cboCoffee.Items.Remove(cboCoffee.Text);
+            }
+
+            //back to default
+            cboCoffee.DropDownStyle = ComboBoxStyle.DropDown;
+        }
+
+       /// <summary>
+       /// Print the selected options
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>
+        private void tsmiPrintSelected_Click(object sender, EventArgs e)
+        {
+            if (lstSyrup.SelectedIndex == -1)
+                lstSyrup.SelectedIndex = 0;
+
+            if (cboCoffee.SelectedIndex != -1)
+                printSelectedDocument.Print();
+            else
+            {
+                MessageBox.Show("Please select a Coffee flavour", "Print Selection", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                cboCoffee.Focus();
+            }
+
+        }
+
+        private void tsmiPreviewSelected_Click(object sender, EventArgs e)
+        {
+            if (lstSyrup.SelectedIndex == -1)
+                lstSyrup.SelectedIndex = 0;
+
+            if (cboCoffee.SelectedIndex != -1)
+            {
+                printPreviewDialog1.Document = printSelectedDocument;
+                printPreviewDialog1.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please select a Coffee flavour", "Print Selection", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                cboCoffee.Focus();
+            }
+
+        }
+
+        private void tsmiPrintAll_Click(object sender, EventArgs e)
+        {
+            printAllDocument.Print();
+        }
+
+        private void tsmiPreviewAll_Click(object sender, EventArgs e)
+        {
+            printPreviewDialog1.Document = printAllDocument;
+            printPreviewDialog1.ShowDialog();
         }
     }
 }
