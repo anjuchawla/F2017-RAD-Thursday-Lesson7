@@ -40,8 +40,9 @@ namespace Lesson6
         private void printAllDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             // Handle printing and print previews when printing all flavours.
-
-            Font printFont = new Font("Arial", 12);
+            if (cboCoffee.Items.Count > 0)
+            {
+                Font printFont = new Font("Arial", 12);
             float lineHeightFloat = printFont.Height + 2;
             float horizontalPrintLocationFloat = e.MarginBounds.Left;
             float verticalPrintLocationFloat = e.MarginBounds.Top;
@@ -55,8 +56,7 @@ namespace Lesson6
 
             // Loop through the entire list.
             //for (int listIndexInteger = 0; listIndexInteger < CoffeeComboBox.Items.Count - 1; listIndexInteger++)
-            if (cboCoffee.Items.Count > 0)
-            {
+           
                 foreach (Object flavor in cboCoffee.Items)
                 {
                     //increment the  Y position for the next line.
