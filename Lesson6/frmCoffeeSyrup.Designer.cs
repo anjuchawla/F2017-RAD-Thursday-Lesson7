@@ -185,14 +185,14 @@
             // tsmiPrintAll
             // 
             this.tsmiPrintAll.Name = "tsmiPrintAll";
-            this.tsmiPrintAll.Size = new System.Drawing.Size(181, 26);
+            this.tsmiPrintAll.Size = new System.Drawing.Size(155, 26);
             this.tsmiPrintAll.Text = "&Print All";
             this.tsmiPrintAll.Click += new System.EventHandler(this.tsmiPrintAll_Click);
             // 
             // tsmiPreviewAll
             // 
             this.tsmiPreviewAll.Name = "tsmiPreviewAll";
-            this.tsmiPreviewAll.Size = new System.Drawing.Size(181, 26);
+            this.tsmiPreviewAll.Size = new System.Drawing.Size(155, 26);
             this.tsmiPreviewAll.Text = "Pre&view all";
             this.tsmiPreviewAll.Click += new System.EventHandler(this.tsmiPreviewAll_Click);
             // 
@@ -238,12 +238,14 @@
             this.tsmiClearAll.Name = "tsmiClearAll";
             this.tsmiClearAll.Size = new System.Drawing.Size(246, 26);
             this.tsmiClearAll.Text = "&Clear All Coffee Flavours";
+            this.tsmiClearAll.Click += new System.EventHandler(this.tsmiClearAll_Click);
             // 
             // tsmiCountCoffeeFlavours
             // 
             this.tsmiCountCoffeeFlavours.Name = "tsmiCountCoffeeFlavours";
             this.tsmiCountCoffeeFlavours.Size = new System.Drawing.Size(246, 26);
             this.tsmiCountCoffeeFlavours.Text = "C&ount Coffee Flavours";
+            this.tsmiCountCoffeeFlavours.Click += new System.EventHandler(this.tsmiCountCoffeeFlavours_Click);
             // 
             // tsmiHelp
             // 

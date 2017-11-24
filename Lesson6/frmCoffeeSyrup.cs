@@ -24,8 +24,8 @@ namespace Lesson6
         {
             InitializeComponent();
         }
-      
-       
+
+
         /// <summary>
         /// Close/terminate the application
         /// </summary>
@@ -129,17 +129,19 @@ namespace Lesson6
         private void tsmiAddCoffeeFlavour_Click(object sender, EventArgs e)
         {
             bool itemFound;
-            
+            int position;
 
             //if the user has provided a new flavour
-            if(cboCoffee.Text.Trim() != String.Empty)
+            if (cboCoffee.Text.Trim() != String.Empty)
             {
-                itemFound = CheckFlavour(cboCoffee.Text);
-                if(itemFound) //flavour already present
+                itemFound = CheckFlavour(cboCoffee.Text, out position);
+
+
+                if (itemFound) //flavour already present
                 {
                     MessageBox.Show("Duplicate flavour cannot be added",
                         "Add Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    cboCoffee.SelectAll();
+                    //cboCoffee.SelectAll();
                     cboCoffee.Focus();
 
                 }
@@ -153,20 +155,23 @@ namespace Lesson6
             }
             else // no flavour provided
             {
-                MessageBox.Show("Enter a coffee flavour to add", "Missing Data", 
+                MessageBox.Show("Enter a coffee flavour to add", "Missing Data",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 cboCoffee.Focus();
             }
 
         }
 
-        private bool CheckFlavour(string text)
+        private bool CheckFlavour(string text, out int position)
         {
-           
-            foreach(Object item in cboCoffee.Items)
+            position = -1;  //will be set to the position of the item if found
+
+
+            foreach (Object item in cboCoffee.Items)
             {
-              
-                return text.Equals((String)item, StringComparison.CurrentCultureIgnoreCase);
+                position++;
+                if (text.Equals(item.ToString().Trim(), StringComparison.CurrentCultureIgnoreCase))
+                    return true;
             }
 
             return false;
@@ -177,36 +182,82 @@ namespace Lesson6
 
         private void tsmiRemoveCoffeeFlavour_Click(object sender, EventArgs e)
         {
-            //to force the user to select from the list
-            cboCoffee.DropDownStyle = ComboBoxStyle.DropDownList;
-            
+            //remove a coffee flavour if it exists
+            bool itemFound;
+            int position; //the position if it is found
 
-         
+
+            //user types in the coffee flavour to delete
+            if (cboCoffee.SelectedIndex == -1 && cboCoffee.Text.Trim() != String.Empty)
+            {
+                itemFound = CheckFlavour(cboCoffee.Text, out position);
+
+                //if flavour found
+                if (!itemFound)
+                {
+                    MessageBox.Show("Cannot find the flavour to remove", "Remove Failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    cboCoffee.Focus();
+                }
+                else
+                {
+                    //remove the flavour
+                    cboCoffee.Items.RemoveAt(position);
+                    MessageBox.Show("Coffee flavour removed", "Remove Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    cboCoffee.Text = String.Empty;
+                }
+            }
+
+
+
+            else  //selection made from list?
+            {
+                if (cboCoffee.SelectedIndex == -1)//no selection made
+                {
+                    MessageBox.Show("Please select or enter the coffee flavour to remove first", "Remove Failed",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    cboCoffee.Focus();
+                }
+
+                else //selection made
+                {
+                    cboCoffee.Items.RemoveAt(cboCoffee.SelectedIndex);
+                    //cboCoffee.Items.Remove(cboCoffee.SelectedItem);
+                    // cboCoffee.Items.Remove(coffeeComboBox.Items[cboCoffee.SelectedIndex]);
+                    MessageBox.Show("Coffee flavour removed", "Remove Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+            }
+
         }
 
         private void cboCoffee_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //no selection made
-            if (cboCoffee.SelectedIndex == -1)
+            //if invoked for removal of coffee flavour
+            if (sender == tsmiRemoveCoffeeFlavour)
             {
-                MessageBox.Show("Please select the flavour to delete", "Delete Failed",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                cboCoffee.Focus();
-            }
-            else
-            {
-                cboCoffee.Items.Remove(cboCoffee.Text);
-            }
 
-            //back to default
-            cboCoffee.DropDownStyle = ComboBoxStyle.DropDown;
+                //no selection made
+                if (cboCoffee.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Please select the flavour to delete", "Delete Failed",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    cboCoffee.Focus();
+                }
+                else
+                {
+                    cboCoffee.Items.Remove(cboCoffee.Text);
+                }
+
+                //back to default
+                //cboCoffee.DropDownStyle = ComboBoxStyle.DropDown;
+            }
         }
 
-       /// <summary>
-       /// Print the selected options
-       /// </summary>
-       /// <param name="sender"></param>
-       /// <param name="e"></param>
+        /// <summary>
+        /// Print the selected options
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tsmiPrintSelected_Click(object sender, EventArgs e)
         {
             if (lstSyrup.SelectedIndex == -1)
@@ -249,6 +300,27 @@ namespace Lesson6
         {
             printPreviewDialog1.Document = printAllDocument;
             printPreviewDialog1.ShowDialog();
+        }
+
+        private void tsmiCountCoffeeFlavours_Click(object sender, EventArgs e)
+        {
+
+            //displaying the number of coffeee flavours
+            string message = "The number of available coffee flavours are " + cboCoffee.Items.Count;
+            MessageBox.Show(message, "Coffee Flavours", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void tsmiClearAll_Click(object sender, EventArgs e)
+        {
+            //clear the cofffee list-remove all flavours after confirming from user
+            DialogResult confirm = MessageBox.Show("Remove all coffee flavours?", "Clear Coffee List",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+            //check user response
+            if (confirm == DialogResult.Yes)
+            {
+                cboCoffee.Items.Clear();
+            }
         }
     }
 }
