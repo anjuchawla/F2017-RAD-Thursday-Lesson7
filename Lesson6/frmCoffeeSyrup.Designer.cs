@@ -109,7 +109,7 @@
             this.cboCoffee.Name = "cboCoffee";
             this.cboCoffee.Size = new System.Drawing.Size(193, 24);
             this.cboCoffee.TabIndex = 4;
-            this.cboCoffee.SelectedIndexChanged += new System.EventHandler(this.cboCoffee_SelectedIndexChanged);
+            
             // 
             // lstSyrup
             // 

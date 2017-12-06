@@ -230,28 +230,7 @@ namespace Lesson6
 
         }
 
-        private void cboCoffee_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //if invoked for removal of coffee flavour
-            if (sender == tsmiRemoveCoffeeFlavour)
-            {
-
-                //no selection made
-                if (cboCoffee.SelectedIndex == -1)
-                {
-                    MessageBox.Show("Please select the flavour to delete", "Delete Failed",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    cboCoffee.Focus();
-                }
-                else
-                {
-                    cboCoffee.Items.Remove(cboCoffee.Text);
-                }
-
-                //back to default
-                //cboCoffee.DropDownStyle = ComboBoxStyle.DropDown;
-            }
-        }
+        
 
         /// <summary>
         /// Print the selected options
