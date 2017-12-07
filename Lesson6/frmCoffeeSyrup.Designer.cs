@@ -108,8 +108,8 @@
             this.cboCoffee.Location = new System.Drawing.Point(68, 167);
             this.cboCoffee.Name = "cboCoffee";
             this.cboCoffee.Size = new System.Drawing.Size(193, 24);
+            this.cboCoffee.Sorted = true;
             this.cboCoffee.TabIndex = 4;
-            
             // 
             // lstSyrup
             // 
@@ -124,6 +124,7 @@
             this.lstSyrup.Location = new System.Drawing.Point(398, 167);
             this.lstSyrup.Name = "lstSyrup";
             this.lstSyrup.Size = new System.Drawing.Size(120, 84);
+            this.lstSyrup.Sorted = true;
             this.lstSyrup.TabIndex = 5;
             // 
             // menuStrip1

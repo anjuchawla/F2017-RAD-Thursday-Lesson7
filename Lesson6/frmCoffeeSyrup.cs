@@ -228,9 +228,7 @@ namespace Lesson6
                 }
             }
 
-        }
-
-        
+        }        
 
         /// <summary>
         /// Print the selected options
