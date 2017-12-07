@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,11 @@ namespace Lesson6
 {
     public partial class frmCoffeeSyrup : Form
     {
+        private FileStream fs;
+        private StreamReader coffeeStreamReader;
+        private StreamWriter coffeeStreamWriter;
+
+
         public frmCoffeeSyrup()
         {
             InitializeComponent();
@@ -298,6 +304,90 @@ namespace Lesson6
             {
                 cboCoffee.Items.Clear();
             }
+        }
+
+        private void frmCoffeeSyrup_Load(object sender, EventArgs e)
+        {
+            openFileToolStripMenuItem_Click(sender, e);
+        }
+
+        private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult response;
+            String coffeeName;
+            String dir = @"c:\anju\files";
+
+
+            //if the stream is open close it
+            if (coffeeStreamReader != null)
+                coffeeStreamReader.Close();
+
+            //set properties
+            openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory(); //dir
+            openFileDialog1.FileName = "coffees.txt";
+            openFileDialog1.Filter = "Text Files(*.txt)|*.txt|All Files(*.*)|*.*";
+            openFileDialog1.Title= "Select File or Directory";
+
+            //show it and accept response from user
+            response = openFileDialog1.ShowDialog();
+
+            //user did not cancel
+            if(response != DialogResult.Cancel)
+                try
+            {
+              //  fs = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read);
+                //coffeeStreamReader = new StreamReader(fs);
+               coffeeStreamReader = new StreamReader(openFileDialog1.FileName);
+                    try
+                    {
+                        //populate the coffee list from the contents of the file
+                        while(coffeeStreamReader.Peek() != -1 )//data in file?
+                        {
+                            coffeeName = coffeeStreamReader.ReadLine();
+                            cboCoffee.Items.Add(coffeeName);
+
+                        }
+
+                    }
+                    catch(IOException ioEx)
+                    {
+
+                        MessageBox.Show(ioEx.Message, "Input/Output Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    }
+                    catch(OutOfMemoryException )
+                    {
+
+                    }
+                    catch(ArgumentNullException)
+                    {
+
+                    }
+
+                }
+                catch(FileNotFoundException )
+                {
+                    MessageBox.Show("File does not exist", "File Opening Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            catch(Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+                finally
+                {
+                    //close on file stream closes file
+                   // if (fs != null)
+                    //    fs.Close();
+
+                    if (coffeeStreamReader != null)
+                        coffeeStreamReader.Close();
+
+                }
+
+
+
         }
     }
 }
